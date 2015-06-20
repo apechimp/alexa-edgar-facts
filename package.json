@@ -1,0 +1,31 @@
+{
+  "name": "alexa-edgar-facts",
+  "version": "1.0.0",
+  "description": "Alexa app for facts about @apechimp's dog, Edgar.",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apechimp/alexa-edgar-facts.git"
+  },
+  "keywords": [
+    "alexa",
+    "edgar",
+    "facts"
+  ],
+  "author": "Mike Atkins",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/apechimp/alexa-edgar-facts/issues"
+  },
+  "homepage": "https://github.com/apechimp/alexa-edgar-facts#readme",
+  "private": true,
+  "dependencies": {
+    "edgar-facts": "^1.0.0"
+  },
+  "devDependencies": {
+    "standard": "^4.3.1"
+  }
+}
