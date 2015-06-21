@@ -63,14 +63,8 @@ function buildSpeechletResponse (title, output, repromptText, shouldEndSession) 
     },
     card: {
       type: 'Simple',
-      title: 'SessionSpeechlet - ' + title,
-      content: 'SessionSpeechlet - ' + output
-    },
-    reprompt: {
-      outputSpeech: {
-        type: 'PlainText',
-        text: repromptText
-      }
+      title: title,
+      content: output
     },
     shouldEndSession: shouldEndSession
   }
