@@ -4,6 +4,9 @@
   "description": "Alexa app for facts about @apechimp's dog, Edgar.",
   "main": "index.js",
   "scripts": {
+    "prebundle": "npm update && npm test",
+    "bundle": "npm prune --production && zip -vr alexa-edgar-facts.zip . -x alexa-edgar-facts.zip -x .git/\\*",
+    "postbundle": "npm install",
     "test": "standard"
   },
   "repository": {
