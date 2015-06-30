@@ -31,3 +31,6 @@ node_modules
 
 # Artifact for AWS
 alexa-edgar-facts.zip
+
+# Config with secrets
+config.json

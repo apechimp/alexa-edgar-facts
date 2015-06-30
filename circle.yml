@@ -1,0 +1,8 @@
+deployment:
+  production:
+    branch: master
+    commands:
+      - npm run bundle
+
+artifacts:
+  - alexa-edgar-facts.zip
