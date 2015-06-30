@@ -1,3 +1,4 @@
+var config = require('./config')
 var edgarFacts = require('edgar-facts')
 var R = require('ramda')
 
@@ -29,8 +30,8 @@ function buildResponse (speechletResponse) {
 
 exports.handler = function (event, context) {
   try {
-    if (event.session.application.applicationId !== 'amzn1.echo-sdk-ams.app.0e44f846-df40-425c-807a-8957e3c5f089') {
-      context.fail('Invalid Application ID')
+    if (event.session.application.applicationId !== config.applicationId) {
+      return context.fail('Invalid Application ID')
     }
 
     switch (event.request.type) {
@@ -46,6 +47,7 @@ exports.handler = function (event, context) {
         context.succeed()
     }
   } catch (e) {
+    console.error('error', e.stack)
     context.fail('Exception: ' + e)
   }
 }
