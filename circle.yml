@@ -4,5 +4,6 @@ deployment:
     commands:
       - npm run bundle
 
-artifacts:
-  - alexa-edgar-facts.zip
+general:
+  artifacts:
+    - alexa-edgar-facts.zip
