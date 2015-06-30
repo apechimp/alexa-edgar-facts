@@ -26,7 +26,8 @@
   "homepage": "https://github.com/apechimp/alexa-edgar-facts#readme",
   "private": true,
   "dependencies": {
-    "edgar-facts": "^1.0.0"
+    "edgar-facts": "^1.0.4",
+    "ramda": "^0.15.1"
   },
   "devDependencies": {
     "standard": "^4.3.1"
