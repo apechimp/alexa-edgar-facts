@@ -5,7 +5,7 @@ var R = require('ramda')
 /**
  * Helpers that build all of the responses.
  */
-function buildSpeechletResponse (title, output, repromptText, shouldEndSession) {
+function buildSpeechletResponse (title, output, shouldEndSession) {
   return {
     outputSpeech: {
       type: 'PlainText',
@@ -40,7 +40,7 @@ exports.handler = function (event, context) {
           context.succeed.bind(context),
           buildResponse,
           buildSpeechletResponse
-        )('An Edgar Fact', edgarFacts(), '', true)
+        )('An Edgar Fact', edgarFacts(), true)
         break
       default:
         console.log('recieved', event.request.type)
