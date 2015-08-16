@@ -15,6 +15,9 @@ test('should fail context if application id is invalid', function (t) {
   )
 })
 
+test('should fail if unknown request')
+test('should fail if unknown intent')
+
 test('should succeed for session ended', function (t) {
   t.plan(1)
 
@@ -121,3 +124,5 @@ test('should send back help for Help intent', function (t) {
     }
   )
 })
+
+test('should send back license info for the license info intent')
