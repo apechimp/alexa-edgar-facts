@@ -28,6 +28,16 @@ function buildResponse (speechletResponse) {
   }
 }
 
+var respond = R.curry(function (title, output, shouldEndSession, context) {
+  R.compose(
+    context.succeed.bind(context),
+    buildResponse,
+    buildSpeechletResponse
+  )(title, output, shouldEndSession)
+})
+
+var respondWithEdgarFact = respond('An Edgar Fact', edgarFacts(), true)
+
 exports.handler = function (event, context) {
   try {
     if (event.session.application.applicationId !== config.applicationId) {
@@ -36,12 +46,21 @@ exports.handler = function (event, context) {
 
     switch (event.request.type) {
       case 'IntentRequest':
+        switch (event.request.intent.name) {
+          case 'EdgarFact':
+            respondWithEdgarFact(context)
+            break
+          case 'Help':
+            respond(
+              'Edgar Facts Help',
+              'Edgar facts is here to tell you everything you need to know about Edgar the dog. Just say \'Alexa, tell me an Edgar fact.\'',
+              true,
+              context
+            )
+        }
+        break
       case 'LaunchRequest':
-        R.compose(
-          context.succeed.bind(context),
-          buildResponse,
-          buildSpeechletResponse
-        )('An Edgar Fact', edgarFacts(), true)
+        respondWithEdgarFact(context)
         break
       default:
         console.log('recieved', event.request.type)

@@ -90,3 +90,34 @@ test('should send back an edgar fact for EdgarFact intent', function (t) {
     }
   )
 })
+
+test('should send back help for Help intent', function (t) {
+  t.plan(10)
+
+  handler(
+    {
+      request: { type: 'IntentRequest', intent: { name: 'Help' } },
+      session: { application: { applicationId: config.applicationId } }
+    },
+    {
+      fail: t.fail,
+      succeed: function (msg) {
+        var response
+        t.ok(response = msg.response, 'response should exist')
+
+        t.ok(response.shouldEndSession, 'should end session')
+
+        t.equal(response.outputSpeech.type, 'PlainText')
+        t.equal(typeof response.outputSpeech.text, 'string')
+
+        t.equal(response.card.type, 'Simple')
+        t.equal(response.card.title, 'Edgar Facts Help')
+        t.equal(typeof response.card.content, 'string')
+        t.equal(response.card.content, response.outputSpeech.text)
+        t.ok(response.card.content.match(/Edgar facts is here to tell you everything you need to know about Edgar the dog\. Just say 'Alexa, tell me an Edgar fact\.'/))
+
+        t.ok(!response.repromptText, 'no reprompt')
+      }
+    }
+  )
+})
