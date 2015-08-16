@@ -15,8 +15,39 @@ test('should fail context if application id is invalid', function (t) {
   )
 })
 
-test('should fail if unknown request')
-test('should fail if unknown intent')
+test('should fail if unknown request', function (t) {
+  t.plan(1)
+
+  handler(
+    {
+      request: { type: 'lol' },
+      session: { application: { applicationId: config.applicationId } }
+    },
+    {
+      fail: function (msg) {
+        t.equal(msg, 'Unknown request type: lol')
+      },
+      succeed: t.fail
+    }
+  )
+})
+
+test('should fail if unknown intent', function (t) {
+  t.plan(1)
+
+  handler(
+    {
+      request: { type: 'IntentRequest', intent: { name: 'lol' } },
+      session: { application: { applicationId: config.applicationId } }
+    },
+    {
+      fail: function (msg) {
+        t.equal(msg, 'Unknown intent: lol')
+      },
+      succeed: t.fail
+    }
+  )
+})
 
 test('should succeed for session ended', function (t) {
   t.plan(1)
@@ -125,4 +156,33 @@ test('should send back help for Help intent', function (t) {
   )
 })
 
-test('should send back license info for the license info intent')
+test('should send back license info for the license info intent', function (t) {
+  t.plan(10)
+
+  handler(
+    {
+      request: { type: 'IntentRequest', intent: { name: 'LicenseInfo' } },
+      session: { application: { applicationId: config.applicationId } }
+    },
+    {
+      fail: t.fail,
+      succeed: function (msg) {
+        var response
+        t.ok(response = msg.response, 'response should exist')
+
+        t.ok(response.shouldEndSession, 'should end session')
+
+        t.equal(response.outputSpeech.type, 'PlainText')
+        t.equal(typeof response.outputSpeech.text, 'string')
+
+        t.equal(response.card.type, 'Simple')
+        t.equal(response.card.title, 'Edgar Facts License Information')
+        t.equal(typeof response.card.content, 'string')
+        t.equal(response.card.content, response.outputSpeech.text)
+        t.ok(response.card.content.match(/Edgar facts is licensed via the AGPL. For more information, and to view the source code, goto https:\/\/github\.com\/apechimp\/alexa-edgar-facts/))
+
+        t.ok(!response.repromptText, 'no reprompt')
+      }
+    }
+  )
+})

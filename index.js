@@ -57,17 +57,29 @@ exports.handler = function (event, context) {
               true,
               context
             )
+            break
+          case 'LicenseInfo':
+            respond(
+              'Edgar Facts License Information',
+              'Edgar facts is licensed via the AGPL. For more information, and to view the source code, goto https://github.com/apechimp/alexa-edgar-facts',
+              true,
+              context
+            )
+            break
+          default:
+            context.fail('Unknown intent: ' + event.request.intent.name)
         }
         break
       case 'LaunchRequest':
         respondWithEdgarFact(context)
         break
-      default:
-        console.log('recieved', event.request.type)
+      case 'SessionEndedRequest':
         context.succeed()
+        break
+      default:
+        context.fail('Unknown request type: ' + event.request.type)
     }
   } catch (e) {
-    console.error('error', e.stack)
     context.fail('Exception: ' + e)
   }
 }
