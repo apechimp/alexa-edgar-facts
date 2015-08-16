@@ -28,15 +28,17 @@ function buildResponse (speechletResponse) {
   }
 }
 
-var respond = R.curry(function (title, output, shouldEndSession, context) {
+function respond (title, output, shouldEndSession, context) {
   R.compose(
     context.succeed.bind(context),
     buildResponse,
     buildSpeechletResponse
   )(title, output, shouldEndSession)
-})
+}
 
-var respondWithEdgarFact = respond('An Edgar Fact', edgarFacts(), true)
+function respondWithEdgarFact (context) {
+  respond('An Edgar Fact', edgarFacts(), true, context)
+}
 
 exports.handler = function (event, context) {
   try {
