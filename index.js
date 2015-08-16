@@ -35,6 +35,7 @@ exports.handler = function (event, context) {
     }
 
     switch (event.request.type) {
+      case 'IntentRequest':
       case 'LaunchRequest':
         R.compose(
           context.succeed.bind(context),
