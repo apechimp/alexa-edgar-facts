@@ -2,7 +2,7 @@ deployment:
   production:
     branch: master
     commands:
-      - npm run bundle
+      - npm run deploy
 
 general:
   artifacts:
