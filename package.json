@@ -8,7 +8,7 @@
     "bundle": "npm prune --production && zip -vr alexa-edgar-facts.zip . -x alexa-edgar-facts.zip -x .git/\\*",
     "postbundle": "npm install",
     "predeploy": "npm run bundle",
-    "deploy": "aws lambda update-function-code --function-name $EDGAR_FACTS_ARN --zip-file fileb://./alexa-edgar-facts.zip --region us-east-1"
+    "deploy": "aws lambda update-function-code --function-name $EDGAR_FACTS_ARN --zip-file fileb://./alexa-edgar-facts.zip --region us-east-1",
     "test": "standard && node test",
     "write-config": "node -e 'console.log(JSON.stringify({ applicationId: process.env.APPLICATION_ID }))' > config.json"
   },
