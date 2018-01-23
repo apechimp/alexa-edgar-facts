@@ -29,7 +29,7 @@
   "homepage": "https://github.com/apechimp/alexa-edgar-facts#readme",
   "private": true,
   "dependencies": {
-    "edgar-facts": "^1.0.5",
+    "edgar-facts": "^1.0.9",
     "optional": "^0.1.3",
     "ramda": "^0.15.1"
   },
