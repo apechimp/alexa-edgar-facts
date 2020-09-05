@@ -3,7 +3,7 @@ version: 2
 jobs:
   deploy:
     docker:
-      -image: circleci/node:14.8.0
+      - image: circleci/node:14.8.0
     steps:
       - checkout
       - restore_cache:
@@ -19,7 +19,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
   test:
     docker:
-      -image: circleci/node:14.8.0
+      - image: circleci/node:14.8.0
     steps:
       - checkout
       - restore_cache:
@@ -43,7 +43,7 @@ workflows:
   version: 2
   test-deploy:
     jobs:
-      - test:
+      - test
       - deploy:
           requires:
             - test
